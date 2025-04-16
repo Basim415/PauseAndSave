@@ -10,9 +10,8 @@
 - ▶️ Click-to-jump directly to saved moments  
 - 🗑️ One-click delete for bookmarks  
 - 📄 Summarize entire YouTube videos using selectable summary lengths  
-- 🧠 Summaries generated locally with no OpenAI usage  
+- 🧠 Summaries generated locally using `whisper.cpp` and the **Cohere API**  
 - 🎨 Dark-themed UI for modern browsing  
-- 🔐 API keys hidden with `.gitignore` (if applicable)
 
 ---
 
@@ -25,6 +24,7 @@
 - Python (transcription server)  
 - ffmpeg (for audio processing)  
 - `whisper.cpp` for transcription  
+- **Cohere API** for summarization
 
 ---
 
@@ -41,18 +41,25 @@
    npm install
    ```
 
-3. **Run the summary server:**
+3. **Add your Cohere API key:**
+   - Create a `.env` file in the root directory.
+   - Add the following line:
+     ```
+     COHERE_API_KEY=your_api_key_here
+     ```
+
+4. **Run the summary server:**
    ```bash
    node transcript_server/server.js
    ```
 
-4. **(Optional) Run the Python transcription server:**
+5. **(Optional) Run the Python transcription server:**
    ```bash
    cd python_server
    python3 app.py
    ```
 
-5. **Load the extension in Chrome:**
+6. **Load the extension in Chrome:**
    - Go to `chrome://extensions/`
    - Enable **Developer mode**
    - Click **Load unpacked** and select the `PauseAndSave` folder
@@ -60,7 +67,7 @@
 ---
 
 📝 **Note**  
-The summary feature is powered by `whisper.cpp` locally. API keys (if used) should be stored in a `.env` file and listed in `.gitignore`.
+The summarization feature requires a **Cohere API key**. Summaries are generated locally using transcribed audio and Cohere’s large language models. Ensure your `.env` file is listed in `.gitignore`.
 
 📄 **License**  
 This project is open source and intended for educational and personal use only.
